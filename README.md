@@ -3,7 +3,7 @@
 Track database update entity and push to Elasticsearch when context save changes
 
 
-What includes in Dockerfile?
+What configurations includes in Dockerfile?
 
 * auditexample-web netcore mvc project
 * Elastic search & Kibana 
