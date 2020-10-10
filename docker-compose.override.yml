@@ -1,0 +1,60 @@
+version: '3.4'
+
+services:
+  auditexample:
+    container_name: auditexample-web
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - "ConnectionStrings:LibraryDbConnection=Server=librarydb;Database=libraryDb;User Id=sa;Password=S@123456++"
+      - "ElasticSearch:URL=http://elasticsearch:9200"
+    ports:
+      - "5007:80"
+    volumes:
+      - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
+      - ${HOME}/.aspnet/https:/root/.aspnet/https/
+    depends_on:
+      - librarydb
+      - elasticsearch
+      - kibana
+    restart: on-failure
+#    command: ["dotnet", "ef", "database update"]
+        
+  librarydb:
+    container_name: librarydb
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "S@123456++"
+      ACCEPT_EULA: "Y"
+
+  elasticsearch:
+    container_name: elasticsearch
+    restart: always
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+#      cap_add:
+#        - IPC_LOCK=54
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+  kibana:
+    container_name: kibana
+    restart: always
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200    # address of elasticsearch docker container which kibana will connect
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch # kibana will start when elasticsearch has started
+          
+          

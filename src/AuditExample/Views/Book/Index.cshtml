@@ -1,0 +1,36 @@
+﻿@model List<AuditExample.Models.Book>
+<div class="container">
+    <div class="jumbotron">
+        <h3>Library</h3>
+    </div>
+    <hr>
+    <a href="/Book/Detail"><input type="button" value="Yeni Kayıt Gir" class="btn btn-success"></a>
+    <table class="table">
+        <thead>
+        <th></th>
+        <th>ID</th>
+        <th>Ad</th>
+        <th>ISBN</th>
+        <th>Author</th>
+           
+        </thead>
+        <tbody>
+        @foreach(var book in Model)
+        {
+            <tr>
+                <td>
+                    <a href="/book/Detail/@book.Id"><input type="button" value="Detay" class="btn btn-primary"></a>
+                    <a href="/book/Delete/@book.Id"><input type="button" value="Sil" class="btn btn-danger"></a>
+                </td>
+                <td>
+                    @book.Id
+                </td>
+                <td>@book.Name</td>
+                <td>@book.ISBN</td>
+                <td>@book.Author</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
