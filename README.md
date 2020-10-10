@@ -1,6 +1,6 @@
 # AuditElasticsearchExample
 
-### Track database update entity and push to Elasticsearch when context save changes
+### Track database "updated entity" and push to Elasticsearch when context save changes.
 
 
 ## What configurations includes in Dockerfile?
