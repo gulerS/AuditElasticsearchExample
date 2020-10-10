@@ -19,3 +19,7 @@ docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml build
 ```powershell
 docker-compose -f .\docker-compose.yml -f .\docker-compose.override.yml up -d
 ```
+
+
+Kibana Url : http://localhost:5601 
+MVC Web UI : http://localhost:5007
